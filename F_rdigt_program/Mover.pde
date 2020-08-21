@@ -43,6 +43,7 @@ class Mover {
       velocity.y *=-1;
       PVector slope = new PVector(3, 0);
       applyForce(slope);
+      Collisions++;
       location.y = 0.11*location.x+400-mass*5;
     } else if (location.y < 0) {
       velocity.y *= -1;
