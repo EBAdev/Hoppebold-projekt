@@ -16,7 +16,7 @@ void setup() {
     .setMin(1)
     .setNumberOfTickMarks(10)
     ;
-    
+
   for (int i = 0; i < numEnt; i++) {
     float m =3;
     movers.add(new Mover(m, random(width-100), random(height-400)));
@@ -30,7 +30,9 @@ void settings() {
 void draw() {
   background(136, 206, 235);
   fill(210, 105, 93);
-  line(0, 400, 600, 460);
+  triangle(0, 400, 0, 600, 600, 460);
+  noStroke();
+  rect(0,460,610,210);
   fill(253, 184, 19);
   circle(580, 0, 100);
 
