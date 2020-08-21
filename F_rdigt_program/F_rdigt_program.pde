@@ -1,8 +1,9 @@
 import controlP5.*;
 ControlP5 cp5;
 ArrayList <Mover> movers = new ArrayList <Mover>();
-int numEnt = 1;
 
+int numEnt = 1;
+int Collisions = 0;
 void setup() {
   cp5 = new ControlP5(this);
   cp5.addButton("Restart")
@@ -32,7 +33,7 @@ void draw() {
   fill(210, 105, 93);
   triangle(0, 400, 0, 600, 600, 460);
   noStroke();
-  rect(0,460,610,210);
+  rect(0, 460, 610, 210);
   fill(253, 184, 19);
   circle(580, 0, 100);
 
@@ -51,8 +52,9 @@ void draw() {
       if (m != k) {
         PVector g = PVector.sub(m.location, k.location);
         float distanceBetween = g.mag();
-        if (distanceBetween <= m.mass*10) {
+        if (distanceBetween <=  m.mass*10) {
           m.velocity.add(g.setMag(4));
+          Collisions++;
         }
       }
     }
@@ -61,7 +63,19 @@ void draw() {
     m.checkEdges();
     m.update();
     m.display();
+
+    if (keyPressed) {
+      if (key ==' ') {
+        PVector Wind = new PVector(-5, 0);
+        m.applyForce(Wind);
+      }
+    }
   }
+  textSize(16);
+  fill(0);
+  textAlign(CENTER);
+  text("Collisions: "+Collisions,width/2,30);
+  
 }
 
 void mouseReleased() {
@@ -75,6 +89,7 @@ void mouseReleased() {
 }
 
 void Restart() {
+  Collisions = 0;
   movers.clear();
   setup();
 }
